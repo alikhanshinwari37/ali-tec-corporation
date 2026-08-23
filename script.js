@@ -71,13 +71,13 @@ contactForm.addEventListener("submit", async (event) => {
 
     try {
 
-        const response = await fetch("/send-message", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        });
+     const response = await fetch("https://ali-tec-corporation.onrender.com/send-message", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+});
 
         const result = await response.json();
 
