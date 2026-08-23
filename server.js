@@ -4,18 +4,12 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const path = require("path");
 
-const app = express();
-app.use(cors({
+const app = express();app.use(cors({
     origin: "https://alikhanshinwari37.github.io",
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"]
 }));
 
-app.options(/.*/, cors({
-    origin: "https://alikhanshinwari37.github.io",
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"]
-}));
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
