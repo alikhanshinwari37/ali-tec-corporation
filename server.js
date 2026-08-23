@@ -43,7 +43,7 @@ app.post("/send-message", async (req, res) => {
     try {
 
             const { data, error } = await resend.emails.send({
-            from: "Ali Tec Corporation<onboarding@resend.dev",
+            from: "onboarding@resend.dev",
             to: process.env.EMAIL_USER,
             reply_to: email,
             subject: `New Project Inquiry - ${project}`,
