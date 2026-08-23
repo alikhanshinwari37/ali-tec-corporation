@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const nodemailer = require("nodemailer");
+const {Resend } = require("resend");
 const path = require("path");
 
 const app = express();
@@ -26,16 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
 // Gmail transporter
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    family: 4,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Contact Form
 app.post("/send-message", async (req, res) => {
@@ -51,10 +42,10 @@ app.post("/send-message", async (req, res) => {
 
     try {
 
-        await transporter.sendMail({
-            from: process.env.EMAIL_USER,
+            await resend.emails.send({
+            from: "onboarding@resend.dev",
             to: process.env.EMAIL_USER,
-            replyTo: email,
+            reply_to: email,
             subject: `New Project Inquiry - ${project}`,
             text: `
 New message received from Ali Tec Corporation website.
