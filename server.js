@@ -42,7 +42,7 @@ app.post("/send-message", async (req, res) => {
 
     try {
 
-            await resend.emails.send({
+            const { data, error } = await resend.emails.send({
             from: "onboarding@resend.dev",
             to: process.env.EMAIL_USER,
             reply_to: email,
@@ -58,6 +58,14 @@ Message:
 ${message}
             `
         });
+        if (error) {
+    console.error("Resend Error:", error);
+
+    return res.status(500).json({
+        success: false,
+        message: "Unable to send message."
+    });
+}
 
         res.json({
             success: true,
